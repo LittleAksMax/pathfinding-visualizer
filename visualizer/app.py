@@ -1,15 +1,14 @@
 import pygame
 from .window import Window
-from .constants import WIDTH, HEIGHT
+from .constants import SCREEN_WIDTH, SCREEN_HEIGHT
 from .draw import *
 
 
 class App(object):
-    def __init__(self, grid_width, grid_height, run_flags):
+    def __init__(self, grid_side, run_flags, algorthm):
         pygame.init()
-        self.window = Window(WIDTH, HEIGHT, "Pathfinding Visualizer created by @LittleAksMax")
-        self.grid_width = grid_width
-        self.grid_height = grid_height
+        self.window = Window(SCREEN_WIDTH, SCREEN_HEIGHT, "Pathfinding Visualizer created by @LittleAksMax")
+        self.grid_side = grid_side
         self.flags = run_flags
 
     def start(self):
@@ -25,6 +24,6 @@ class App(object):
 
             # draw #
             clear_background(self.window)
-            draw_grid(self.window, self.grid_width, self.grid_height)
+            draw_grid(self.window, self.grid_side)
 
             self.window.display.flip()  # update changes

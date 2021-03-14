@@ -1,12 +1,20 @@
 from .app import App
-
-ASTAR = 0b00001
-BFS = 0b00010
-DFS = 0b00100
-DIJKSTRA = 0b01000
-QUICK_SOLVE = 0b10000  # no drawing until end
+from .algorithms import Algorithms
 
 
-def run(grid_width, grid_height, run_flags=0b0000):
-    application = App(grid_width, grid_height, run_flags)
+QUICK_SOLVE = 0b001  # no drawing until end
+RANDOM_START_AND_END = 0b010  # create start and end nodes randomly
+RANDOM_MAZE = 0b100  # generate a random maze for solve
+
+
+def run(grid_side, algorithm, run_flags=0b0000):
+    if algorithm == "A*":
+        alg = Algorithms.AStar
+    elif algorithm == "BFS":
+        alg = Algorithms.BFS
+    elif algorithm == "DFS":
+        alg = Algorithms.DFS
+    else:
+        alg = Algorithms.Dijkstra
+    application = App(grid_side, run_flags, alg)
     application.start()
