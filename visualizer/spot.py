@@ -1,5 +1,5 @@
 from .spot_stat import SpotState
-from .constants import START_COLOR, END_COLOR, CLOSED_COLOR, OPEN_COLOR
+from .constants import START_COLOR, END_COLOR, CLOSED_COLOR, OPEN_COLOR, OBSTACLE_COLOR
 
 
 class Spot(object):
@@ -17,6 +17,8 @@ class Spot(object):
             return START_COLOR
         elif state == SpotState.End:
             return END_COLOR
+        elif state == SpotState.Obstacle:
+            return OBSTACLE_COLOR
         elif state == SpotState.Open:
             return OPEN_COLOR
         else:

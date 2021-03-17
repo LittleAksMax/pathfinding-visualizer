@@ -27,5 +27,5 @@ def draw_spots(window, spot_grid, grid_side):
         for spot in row:
             if spot.state == SpotState.Unvisited:
                 continue  # no need to change color, as unvisited color is background color
-            pygame.draw.rect(window.window, Spot.get_rgb_from_state(spot.state), (sqr_sz * spot.x, sqr_sz.spot.y,
+            pygame.draw.rect(window.window, Spot.get_rgb_from_state(spot.state), (sqr_sz * spot.x, sqr_sz * spot.y,
                                                                                   sqr_sz, sqr_sz))
