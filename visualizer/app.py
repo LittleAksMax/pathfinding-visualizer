@@ -76,17 +76,24 @@ class App(object):
         self.window.display.flip()  # update changes
 
     def mainloop(self):
-        solve_value = self.algorithm(self.start_node, self.end_node, self.spot_grid, lambda: self.draw_everything())
-
-        # recolor start and end node to make them distinct from the rest of the path, and so they are not masked
-        self.start_node.set_state(SpotState.Start)
-        self.end_node.set_state(SpotState.End)
-
+        solved = False
         running = True
         while running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN:
+                        if not solved:
+                            self.algorithm(self.start_node, self.end_node, self.spot_grid, lambda: self.draw_everything())
+
+                            # recolor start and end node to make them distinct from the rest of the path, and so they are not masked
+                            self.start_node.set_state(SpotState.Start)
+                            self.end_node.set_state(SpotState.End)
+
+                            solved = True  # so it doesn't resolve
+                        else:
+                            running = False
 
             # draw #
             self.draw_everything()
