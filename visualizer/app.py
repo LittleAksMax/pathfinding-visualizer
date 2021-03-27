@@ -2,7 +2,7 @@ import pygame
 from .window import Window
 from .constants import SCREEN_WIDTH, SCREEN_HEIGHT
 from .draw import *
-from .generate import random_maze, random_start_end
+from .generate import random_maze
 
 
 class App(object):
@@ -22,11 +22,9 @@ class App(object):
         # perform according flag functions #
         if self.random_maze:
             random_maze(self.spot_grid, self.grid_side)
-        if self.random_start_end:
-            random_start_end(self.spot_grid, self.grid_side, self.random_maze)
 
     def fill_grid(self):
-        self.spot_grid = [[Spot(i, j) for j in range(self.grid_side)] for i in range(self.grid_side)]
+        self.spot_grid = [[Spot(j, i) for j in range(self.grid_side)] for i in range(self.grid_side)]
 
     def start(self):
         self.mainloop()
