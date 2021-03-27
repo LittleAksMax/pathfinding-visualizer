@@ -49,7 +49,6 @@ def fill_maze(spot_grid):
 def random_maze(spot_grid, grid_side):
     fill_maze(spot_grid)
     random_start = randint(1, grid_side - 2)
-    random_start = 15
     create_maze(spot_grid[random_start][0], spot_grid, grid_side)  # start at random spot on left edge
 
     spot_grid[random_start][0].set_state(SpotState.Start)  # create start point at random location
