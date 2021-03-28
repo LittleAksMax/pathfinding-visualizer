@@ -2,7 +2,7 @@ from pygame import init, quit
 from .constants import SCREEN_WIDTH, SCREEN_HEIGHT
 from .window import Window
 from .draw import *
-from .generate import random_maze
+from .generate import random_maze, user_create_maze
 from .algorithms import Algorithms, bfs, dfs, astar, dijkstra
 
 
@@ -15,6 +15,7 @@ class App(object):
         # set flags #
         self.quick_solve = run_flags & 1
         self.random_maze = (run_flags >> 1) & 1
+        self.show_generation = (run_flags >> 2) & 1
 
         if algorithm == Algorithms.BFS:
             self.algorithm = bfs  # function
@@ -33,7 +34,9 @@ class App(object):
 
         # perform according flag functions #
         if self.random_maze:
-            self.start_node, self.end_node = random_maze(self.spot_grid, self.grid_side)
+            self.start_node, self.end_node = random_maze(self.spot_grid, self.grid_side, lambda: self.draw_everything() if self.show_generation else None)
+        else:
+            self.start_node, self.end_node = user_create_maze(lambda: self.draw_everything(), self.spot_grid, grid_side)
 
         self.update_spot_neighbors()
 
@@ -71,9 +74,9 @@ class App(object):
 
     def draw_everything(self):
         clear_background(self.window)
-        draw_grid(self.window, self.grid_side)
         draw_spots(self.window, self.spot_grid, self.grid_side)
-        self.window.display.flip()  # update changes
+        draw_grid(self.window, self.grid_side)
+        self.window.display.update()  # update changes
 
     def mainloop(self):
         solved = False
@@ -85,7 +88,7 @@ class App(object):
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN:
                         if not solved:
-                            distance = self.algorithm(self.start_node, self.end_node, self.spot_grid, lambda: self.draw_everything())
+                            distance = self.algorithm(self.start_node, self.end_node, self.spot_grid, lambda: self.draw_everything(), self.quick_solve)
 
                             print(f"Distance: {distance}")
 
@@ -99,3 +102,5 @@ class App(object):
 
             # draw
             self.draw_everything()
+
+            # TODO: assign a button to clear the screen, popup with flags to check for regeration
