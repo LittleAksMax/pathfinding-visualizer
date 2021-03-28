@@ -48,18 +48,15 @@ def fill_maze(spot_grid):
 # keep going recursively until no more moves left
 def random_maze(spot_grid, grid_side):
     fill_maze(spot_grid)
+
+    random_y = randint(1, grid_side - 2) // 2 * 2 + 1
+    random_x = randint(1, grid_side - 2) // 2 * 2 + 1  # make sure they are odd
+
+    create_maze(spot_grid[random_y][random_x], spot_grid, grid_side)  # start at random spot on left edge
+
     random_start = randint(1, grid_side - 2)
-    create_maze(spot_grid[random_start][0], spot_grid, grid_side)  # start at random spot on left edge
-
+    random_end = randint(1, grid_side - 2)
     spot_grid[random_start][0].set_state(SpotState.Start)  # create start point at random location
-
-    # at this start_point, the entire right border/side is accessible, therefore I can just randomly pick one
-    invalid = True
-    random_end = -1  # to declare
-    while invalid:
-        random_end = randint(1, grid_side - 2)
-        if spot_grid[random_end][grid_side - 2].state == SpotState.Unvisited:  # check if node to left is not wall
-            spot_grid[random_end][grid_side - 1].set_state(SpotState.End)  # if not, valid end point
-            invalid = False
+    spot_grid[random_end][grid_side - 1].set_state(SpotState.End)  # create end point at random location
 
     return spot_grid[random_start][0], spot_grid[random_end][grid_side - 1]  # start and end nodes

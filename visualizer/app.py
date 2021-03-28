@@ -1,6 +1,6 @@
 from pygame import init, quit
-from .window import Window
 from .constants import SCREEN_WIDTH, SCREEN_HEIGHT
+from .window import Window
 from .draw import *
 from .generate import random_maze
 from .algorithms import Algorithms, bfs, dfs, astar, dijkstra
@@ -91,9 +91,9 @@ class App(object):
                             self.start_node.set_state(SpotState.Start)
                             self.end_node.set_state(SpotState.End)
 
-                            solved = True  # so it doesn't resolve
+                            solved = True  # so it doesn't solve again
                         else:
                             running = False
 
-            # draw #
+            # draw
             self.draw_everything()
