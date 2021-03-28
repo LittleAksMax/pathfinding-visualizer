@@ -7,6 +7,15 @@ def create_maze(spot, spot_grid, grid_side):
 
     shuffle(directions)  # get random order
 
+    # you check 2 spots in the same direction to make sure there are no cascading blocks, and only straight lines
+    # so this is bad:
+    #       []
+    #    []
+    # []
+    # but this is good
+    #       [] []
+    #    [] []
+    # [] []
     for direction in directions:
         if direction == "N":
             if spot.y - 2 > 0:  # check if exists
@@ -54,8 +63,23 @@ def random_maze(spot_grid, grid_side):
 
     create_maze(spot_grid[random_y][random_x], spot_grid, grid_side)  # start at random spot on left edge
 
-    random_start = randint(1, grid_side - 2)
-    random_end = randint(1, grid_side - 2)
+    random_start = 0
+    random_end = 0  # declare
+
+    invalid = True
+    while invalid:
+        random_start = randint(1, grid_side - 2)
+        if spot_grid[random_start][1].state != SpotState.Unvisited:
+            continue
+        invalid = False
+
+    invalid = True
+    while invalid:
+        random_end = randint(1, grid_side - 2)
+        if spot_grid[random_end][grid_side - 2].state != SpotState.Unvisited:
+            continue
+        invalid = False
+
     spot_grid[random_start][0].set_state(SpotState.Start)  # create start point at random location
     spot_grid[random_end][grid_side - 1].set_state(SpotState.End)  # create end point at random location
 

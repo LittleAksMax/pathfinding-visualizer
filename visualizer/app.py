@@ -85,7 +85,9 @@ class App(object):
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN:
                         if not solved:
-                            self.algorithm(self.start_node, self.end_node, self.spot_grid, lambda: self.draw_everything())
+                            distance = self.algorithm(self.start_node, self.end_node, self.spot_grid, lambda: self.draw_everything())
+
+                            print(f"Distance: {distance}")
 
                             # recolor start and end node to make them distinct from the rest of the path, and so they are not masked
                             self.start_node.set_state(SpotState.Start)

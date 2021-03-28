@@ -27,3 +27,9 @@ class Spot(object):
         else:
             return PATH_COLOR
         # no need to check for unvisited, as unvisited is the background color
+
+    def __repr__(self):
+        return f"({self.x}, {self.y})"
+
+    def __lt__(self, other):
+        return False
