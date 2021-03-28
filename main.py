@@ -4,7 +4,7 @@ import sys
 
 if __name__ == '__main__':
     sys.setrecursionlimit(10000)
-    visualizer.run(120, "A*", visualizer.RANDOM_MAZE)  \
-        # side should be a drop down with all factors of 720, except 720, 360, 180, 240, 1, 2, 3, 4, 5
+    visualizer.run(35, "DIJKSTRA", visualizer.QUICK_SOLVE)  \
+        # 21, 27, 35, 45, 63, 105, 135
 
     sys.exit()
