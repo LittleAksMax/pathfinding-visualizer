@@ -8,7 +8,7 @@ RANDOM_MAZE = 0b010  # generate a random maze for solve, creates random start an
 SHOW_GENERATION = 0b100  # show steps in random maze generation
 
 
-def run(grid_side, algorithm, run_flags=0b00):
+def run(grid_side, algorithm, run_flags=0b000):
     if algorithm == "A*":
         alg = Algorithms.AStar
     elif algorithm == "BFS":

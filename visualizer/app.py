@@ -8,6 +8,9 @@ from .algorithms import Algorithms, bfs, dfs, astar, dijkstra
 
 class App(object):
     def __init__(self, grid_side, run_flags, algorithm):
+
+        self.distance = 0  # declare to show on screen after solve
+
         init()  # initialise pygame
         self.window = Window(SCREEN_WIDTH, SCREEN_HEIGHT, "Pathfinding Visualizer created by @LittleAksMax")
         self.grid_side = grid_side
@@ -76,6 +79,9 @@ class App(object):
         clear_background(self.window)
         draw_spots(self.window, self.spot_grid, self.grid_side)
         draw_grid(self.window, self.grid_side)
+        font = pygame.font.SysFont("", 24)
+        img = font.render("Distance: " + str(self.distance), True, (165, 0, 0))  # dark red text color
+        self.window.window.blit(img, (SCREEN_WIDTH - 115, 15))
         self.window.display.update()  # update changes
 
     def mainloop(self):
@@ -88,9 +94,7 @@ class App(object):
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN:
                         if not solved:
-                            distance = self.algorithm(self.start_node, self.end_node, self.spot_grid, lambda: self.draw_everything(), self.quick_solve)
-
-                            print(f"Distance: {distance}")
+                            self.distance = self.algorithm(self.start_node, self.end_node, self.spot_grid, lambda: self.draw_everything(), self.quick_solve)
 
                             # recolor start and end node to make them distinct from the rest of the path, and so they are not masked
                             self.start_node.set_state(SpotState.Start)
