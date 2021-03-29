@@ -37,7 +37,8 @@ class App(object):
 
         # perform according flag functions #
         if self.random_maze:
-            self.start_node, self.end_node = random_maze(self.spot_grid, self.grid_side, lambda: self.draw_everything() if self.show_generation else None)
+            self.start_node, self.end_node = random_maze(self.spot_grid, self.grid_side,
+                                                         lambda: self.draw_everything() if self.show_generation else None)
         else:
             self.start_node, self.end_node = user_create_maze(lambda: self.draw_everything(), self.spot_grid, grid_side)
 
@@ -94,7 +95,8 @@ class App(object):
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN:
                         if not solved:
-                            self.distance = self.algorithm(self.start_node, self.end_node, self.spot_grid, lambda: self.draw_everything(), self.quick_solve)
+                            self.distance = self.algorithm(self.start_node, self.end_node, self.spot_grid,
+                                                           lambda: self.draw_everything(), self.quick_solve)
 
                             # recolor start and end node to make them distinct from the rest of the path, and so they are not masked
                             self.start_node.set_state(SpotState.Start)

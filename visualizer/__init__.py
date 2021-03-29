@@ -18,6 +18,6 @@ def run(grid_side, algorithm, run_flags=0b000):
     elif algorithm == "DIJKSTRA":
         alg = Algorithms.Dijkstra
     else:
-        sys.exit(-1)
+        sys.exit(-1)  # exit failure if invalid algorithm
     application = App(grid_side, run_flags, alg)
     application.start()
