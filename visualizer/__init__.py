@@ -8,7 +8,7 @@ RANDOM_MAZE = 0b010  # generate a random maze for solve, creates random start an
 SHOW_GENERATION = 0b100  # show steps in random maze generation
 
 
-def run(grid_side, algorithm, run_flags=0b00):
+def run(grid_side, algorithm, run_flags=0b000):
     if algorithm == "A*":
         alg = Algorithms.AStar
     elif algorithm == "BFS":
@@ -18,6 +18,6 @@ def run(grid_side, algorithm, run_flags=0b00):
     elif algorithm == "DIJKSTRA":
         alg = Algorithms.Dijkstra
     else:
-        sys.exit(-1)
+        sys.exit(-1)  # exit failure if invalid algorithm
     application = App(grid_side, run_flags, alg)
     application.start()
