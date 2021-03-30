@@ -15,7 +15,7 @@ def run(grid_side, algorithm, run_flags=0b000):
         alg = Algorithms.BFS
     elif algorithm == "DFS":
         alg = Algorithms.DFS
-    elif algorithm == "Dikjstra":
+    elif algorithm == "Dijkstra":
         alg = Algorithms.Dijkstra
     else:
         sys.exit(-1)  # exit failure if invalid algorithm
