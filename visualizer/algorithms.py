@@ -144,7 +144,6 @@ def dijkstra(start_node, end_node, spot_grid, draw, quick_solve):
     closed_set = set({})  # set with all closed nodes
 
     while not open_set.empty():
-
         current = open_set.get()[1]  # get smallest
         open_set_hash.remove(current)
         closed_set.add(current)
