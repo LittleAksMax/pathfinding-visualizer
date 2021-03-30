@@ -84,14 +84,14 @@ class Ui_VisualizerDialog(object):
         self.randomMaze_Checkbox.stateChanged.connect(self.randomMazeStateChanged)
 
     def visualizeButtonPressed(self):
-        flag = 0b000
+        flags = 0b000
         if self.quickVisualize_Checkbox.checkState() == 2:  # so if it is activated
-            flag += visualizer.QUICK_SOLVE
+            flags += visualizer.QUICK_SOLVE
         if self.randomMaze_Checkbox.checkState() == 2:
-            flag += visualizer.RANDOM_MAZE
-        if self.showGeneration_Checkbox.checkState == 2:
-            flag += visualizer.SHOW_GENERATION
-        visualizer.run(int(self.gridSize_Combobox.currentText()), self.algorithm_Combobox.currentText(), flag)
+            flags += visualizer.RANDOM_MAZE
+        if self.showGeneration_Checkbox.checkState() == 2:
+            flags += visualizer.SHOW_GENERATION
+        visualizer.run(int(self.gridSize_Combobox.currentText()), self.algorithm_Combobox.currentText(), flags)
 
     def randomMazeStateChanged(self):
         if self.randomMaze_Checkbox.isChecked():
